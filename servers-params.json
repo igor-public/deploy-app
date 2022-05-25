@@ -2,13 +2,5 @@
 	{
 		"ParameterKey": "EnvironmentName",
 		"ParameterValue": "UdacityProject"
-	},
-	{
-		"ParameterKey": "DBUsername",
-		"ParameterValue": "master"
-	},
-	{
-		"ParameterKey": "DBPassword",
-		"ParameterValue": "ghbdfn01"
 	}
 ]

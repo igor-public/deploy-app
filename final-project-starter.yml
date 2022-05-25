@@ -1,17 +1,42 @@
 Parameters:
-  # Paramenters are entirely optional.
-  # but using them will make your cloudformation templates more reusable
-  # use them for things that may change over time, such as instance type,
-  # VPCs and so on.
+   AMIID:
+        Description: PCID
+        Type: String
+        Value: ami-0e999cbd62129e3b1
 Resources:
   # instace profile contains the IAM Role name(s) that we want to associate to our auto scaling EC2 Servers
   # never give too much permissions to your EC2 instances! if they get hacked, the permissions get hacked also!
   # in this example, I create a Role called UdacityS3ReadOnlyC2 and just give it a policy of S3 Read-Only Access
-  ProfileWithRolesForOurApp:
-    Type: AWS::IAM::InstanceProfile
+  # ProfileWithRolesForOurApp:
+  #   Type: AWS::IAM::InstanceProfile
+  #   Properties:
+  #     Roles:
+  #       - UdacityS3ReadOnlyEC2
+  myWebAccessSecutiryGroup:
+    Type: AWS::EC2:SecurityGroup
     Properties:
-      Roles:
-        - UdacityS3ReadOnlyEC2
+  myWebServerInstance:
+    Type: ASW::EC2::Instance
+    Properties:
+     ImageId: !Ref AMIID
+           UserData:
+        Fn::Base64: !Sub |
+          #!/bin/bash
+          apt-get update -y
+          apt-get install apache2 -y
+          systemctl start apache2.service
+          cd /var/www/html
+          echo "Udacity Demo Web Server Up and Running!" > index.html
+      KeyName: aws-key
+      SecurityGroups:
+      - Ref: WebServerSecGroup
+      InstanceType: t3.small
+      BlockDeviceMappings:
+      - DeviceName: "/dev/sdk"
+        Ebs:
+          VolumeSize: '10'
+      SecurityGroups:
+      - Ref: WebServerSecGroup
 Outputs: 
   # This is also optional.
   # Bonus points for useful outputs!

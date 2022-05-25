@@ -1,5 +1,5 @@
 Parameters:
-    EnvironmentName:
+    Env1ronmentName:
         Description: Environemnt
         Type: String
     VpcCIDR:
@@ -8,22 +8,22 @@ Parameters:
         Default: 10.0.3.0/24
 
     PublicSubnet1CIDR:
-        Description: Please enter the IP range (CIDR notation) for the public subnet in the first Availability Zone
+        Description: IP range - public subnet - AZ1
         Type: String
         Default: 10.0.0.0/24
 
     PublicSubnet2CIDR:
-        Description: Please enter the IP range (CIDR notation) for the public subnet in the second Availability Zone
+        Description: IP range - public subnet - AZ2
         Type: String
         Default: 10.0.1.0/24
 
     PrivateSubnet1CIDR:
-        Description: Please enter the IP range (CIDR notation) for the private subnet in the first Availability Zone
+        Description: IP range - private subnet - AZ1
         Type: String
         Default: 10.0.2.0/24
 
     PrivateSubnet2CIDR:
-        Description: Please enter the IP range (CIDR notation) for the private subnet in the second Availability Zone
+        Description: IP range - private subnet - AZ2
         Type: String
         Default: 10.0.3.0/24
 
